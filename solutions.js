@@ -46,19 +46,19 @@ export const f4 = (function() {
     return (cb) => { 
 		if(!state.cbIsCalled){
             const wait = new Promise( (resolve, reject) =>  setTimeout( () => resolve() , 300));
-            wait.then( _ => {
-                        if(state.callOccurrence > 0){
-                            state.callOccurrence -= 1;
-                        }else if (state.callOccurrence === 0){
-                            state.cbIsCalled = true;
+            wait.then( _ => { //  300 milliseconds are elapsed
+                        if(state.callOccurrence > 0){ //  we have async events as many as we called f4 each time (callOccurrence)
+                            state.callOccurrence -= 1; // all async event will do nothing after resolving
+                        }else if (state.callOccurrence === 0){ // Just the last promise will invoke the 'cb' function if
+                            state.cbIsCalled = true;           // there is not f4 calls anymore (callOccurrence = 0)
                             cb();
                         }
             });
-            if(!state.firstCall){ 
-                  if(state.cbIsCalled){
-                     return;
-                  }else{
-                     state.callOccurrence += 1;
+            if(!state.firstCall){ // If it's not the first call of f4.
+                  if(state.cbIsCalled){ // If cb has already been called don't do anything,
+                     return;            // cb must be called just once after 300ms.
+                  }else{ // f4 was called before 300 milliseconds are elapsed.
+                     state.callOccurrence += 1; 
                   }
             }else{
 				state.firstCall = false;
