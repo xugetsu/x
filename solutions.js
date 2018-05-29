@@ -20,6 +20,9 @@ export const f1 = (a0, b0) => {
 export const f2 = (a, b) => b.map( el2 => a.filter( el1 => el1 === el2).length );
 
 export const f3 = (a0) => {
+    if(a0 === ''){
+		return 0;
+    }
     const s ='abcdefghijklmnopqrstuvwxyz_-0123456789';
     const a = a0.toLowerCase().split('.');
     for(el of a){
