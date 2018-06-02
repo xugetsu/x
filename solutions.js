@@ -53,7 +53,7 @@ export const f4 = (function() {
                         if(state.callOccurrence > 0){ //  we have async events as many as we called f4 each time (callOccurrence)
                             state.callOccurrence -= 1; // all async event will do nothing after resolving
                         }else if (state.callOccurrence === 0){ // Just the last promise will invoke the 'cb' function if
-                            state.cbIsCalled = true;           // there is not f4 calls anymore (callOccurrence = 0)
+                            state.cbIsCalled = true;           // there is no f4 calls anymore (callOccurrence = 0)
                             cb();
                         }
             });
